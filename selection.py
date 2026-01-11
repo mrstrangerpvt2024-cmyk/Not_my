@@ -375,6 +375,26 @@ class SelectionWayBot:
         # यह 'with' ब्लॉक के बाहर और 'def' के अंदर होना चाहिए
         return filename
 
+# ===== PDF LINKS (ADDED ONLY) =====
+pdf_links = bot_instance.extract_pdf_links(batch_id, token)
+
+if pdf_links:
+    await update.message.reply_text(
+        "📄 **PDF LINKS:**",
+        disable_web_page_preview=True
+    )
+
+    for p in pdf_links:
+        await update.message.reply_text(
+            p,
+            disable_web_page_preview=True
+        )
+else:
+    await update.message.reply_text(
+        "📄 PDF: Not available for this batch",
+        disable_web_page_preview=True
+    )
+# =================================
 # Create bot instance
 bot = SelectionWayBot()
 
@@ -570,6 +590,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
