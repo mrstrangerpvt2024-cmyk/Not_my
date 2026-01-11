@@ -327,12 +327,14 @@ class SelectionWayBot:
             f.write(f"🎯 {course_name}\n\n")
             
             # Write PDF links
-            if pdf_links:
-                f.write("📄 PDF FILES:\n")
-                for pdf in pdf_links:
-                    f.write(f"{pdf}\n")
-                f.write("\n")
-            
+f.write("📄 PDF FILES:\n")
+if pdf_links:
+    for pdf in pdf_links:
+        f.write(f"{pdf}\n")
+else:
+    f.write("❌ No PDF available for this batch\n")
+    f.write("\n")
+    
             # Write video links
             if video_links:
                 f.write("🎥 VIDEO LINKS:\n")
@@ -536,4 +538,5 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
