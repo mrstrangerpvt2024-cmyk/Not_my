@@ -280,6 +280,36 @@ class SelectionWayBot:
         # Add main PDF if available
         if pdf_url:
             pdf_links.append(f"Batch Info PDF : {pdf_url}")
+
+    def extract_pdf_links(self, batch_id, token):
+    """
+    ONLY PDF LINKS
+    No download, no yt-dlp, no notes logic
+    """
+    pdf_links = []
+
+    try:
+        url = (
+            f"https://elearn.crwilladmin.com/api/v1/comp/"
+            f"batch-notes/{batch_id}?token={token}"
+        )
+
+        r = requests.get(url, timeout=15)
+        if r.status_code != 200:
+            return pdf_links
+
+        data = r.json().get("data", {})
+        for item in data.get("notesDetails", []):
+            title = item.get("docTitle", "PDF")
+            link = item.get("docUrl")
+
+            if link and link.endswith(".pdf"):
+                pdf_links.append(f"📄 {title}\n{link}")
+
+    except Exception as e:
+        logger.error(f"PDF extract error: {e}")
+
+    return pdf_links
         
         # Extract video links
         if classes_data and "classes" in classes_data:
@@ -540,6 +570,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
