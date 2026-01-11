@@ -150,12 +150,12 @@ class SelectionWayBot:
             if classes_response.get("state") == 200:
                 # Get course details from active batches to find PDF URL
                 all_batches_success, all_batches = await self.get_all_batches()
-                pdf_url = ""
+                pdf_url = "https://selectionwayserver.hranker.com/pdfs/files/"
                 
                 if all_batches_success:
                     for batch in all_batches:
                         if batch.get('id') == course_id:
-                            pdf_url = self.clean_url(batch.get('batchInfoPdfUrl', ""))
+                            pdf_url = self.clean_url(batch.get('https://selectionwayserver.hranker.com/pdfs/files/', ""))
                             break
                 
                 return True, {
@@ -551,6 +551,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
