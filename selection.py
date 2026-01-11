@@ -291,8 +291,6 @@ class SelectionWayBot:
         for u in urls:
             if u.endswith(".pdf") and "selectionwayserver.hranker.com/pdfs" in u:
                 pdfs.append(u)
-            
-        return pdfs
         
         # Extract video links
         if classes_data and "classes" in classes_data:
@@ -553,6 +551,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
