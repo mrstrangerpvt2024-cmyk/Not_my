@@ -336,12 +336,12 @@ else:
     f.write("\n")
     
             # Write video links
-            if video_links:
-                f.write("🎥 VIDEO LINKS:\n")
-                for video in video_links:
-                    f.write(f"{video}\n")
-        
-        return filename
+    if video_links:
+        f.write("🎥 VIDEO LINKS:\n")
+        for video in video_links:
+            f.write(f"{video}\n")
+            
+            return filename
 
 # Create bot instance
 bot = SelectionWayBot()
@@ -538,5 +538,6 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
