@@ -341,7 +341,7 @@ else:
         for video in video_links:
             f.write(f"{video}\n")
             
-return filename
+    return filename
 
 # Create bot instance
 bot = SelectionWayBot()
@@ -538,6 +538,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
