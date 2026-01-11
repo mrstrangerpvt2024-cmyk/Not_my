@@ -327,20 +327,22 @@ class SelectionWayBot:
             f.write(f"🎯 {course_name}\n\n")
             
             # Write PDF links
-f.write("📄 PDF FILES:\n")
-if pdf_links:
-    for pdf in pdf_links:
-        f.write(f"{pdf}\n")
-else:
-    f.write("❌ No PDF available for this batch\n")
-    f.write("\n")
+            f.write("📄 PDF FILES:\n")
+            if pdf_links:
+                for pdf in pdf_links:
+                    f.write(f"{pdf}\n")
+            else:
+                f.write("❌ No PDF available for this batch\n")
+            
+            f.write("\n") # यह if-else के बाहर होना चाहिए
     
             # Write video links
-    if video_links:
-        f.write("🎥 VIDEO LINKS:\n")
-        for video in video_links:
-            f.write(f"{video}\n")
+            if video_links:
+                f.write("🎥 VIDEO LINKS:\n")
+                for video in video_links:
+                    f.write(f"{video}\n")
         
+        # यह 'with' ब्लॉक के बाहर और 'def' के अंदर होना चाहिए
         return filename
 
 # Create bot instance
@@ -538,6 +540,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
