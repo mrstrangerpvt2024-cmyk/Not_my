@@ -289,8 +289,8 @@ class SelectionWayBot:
         urls = re.findall(r'https?://[^\s]+', raw_text)
         
         for u in urls:
-            if u.endswith(".pdf") and "selectionwayserver.hranker.com/pdfs" in u:
-            pdfs.append(u)
+        if u.endswith(".pdf") and "selectionwayserver.hranker.com/pdfs" in u:
+        pdfs.append(u)
             
         return pdfs
         
@@ -553,6 +553,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
