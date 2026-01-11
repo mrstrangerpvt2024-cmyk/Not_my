@@ -280,6 +280,19 @@ class SelectionWayBot:
         # Add main PDF if available
         if pdf_url:
             pdf_links.append(f"Batch Info PDF : {pdf_url}")
+    
+    def extract_selectionway_pdfs(raw_text):
+    """
+    Extract ONLY SelectionWay PDF links from text / API response
+    """
+    pdfs = []
+    urls = re.findall(r'https?://[^\s]+', raw_text)
+
+    for u in urls:
+        if u.endswith(".pdf") and "selectionwayserver.hranker.com/pdfs" in u:
+            pdfs.append(u)
+
+    return pdfs
         
         # Extract video links
         if classes_data and "classes" in classes_data:
@@ -540,6 +553,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
