@@ -280,36 +280,6 @@ class SelectionWayBot:
         # Add main PDF if available
         if pdf_url:
             pdf_links.append(f"Batch Info PDF : {pdf_url}")
-
-    def extract_pdf_links(self, batch_id, token):
-    """
-    ONLY PDF LINKS
-    No download, no yt-dlp, no notes logic
-    """
-    pdf_links = []
-
-    try:
-        url = (
-            f"https://elearn.crwilladmin.com/api/v1/comp/"
-            f"batch-notes/{batch_id}?token={token}"
-        )
-
-        r = requests.get(url, timeout=15)
-        if r.status_code != 200:
-            return pdf_links
-
-        data = r.json().get("data", {})
-        for item in data.get("notesDetails", []):
-            title = item.get("docTitle", "PDF")
-            link = item.get("docUrl")
-
-            if link and link.endswith(".pdf"):
-                pdf_links.append(f"📄 {title}\n{link}")
-
-    except Exception as e:
-        logger.error(f"PDF extract error: {e}")
-
-    return pdf_links
         
         # Extract video links
         if classes_data and "classes" in classes_data:
@@ -375,26 +345,6 @@ class SelectionWayBot:
         # यह 'with' ब्लॉक के बाहर और 'def' के अंदर होना चाहिए
         return filename
 
-# ===== PDF LINKS (ADDED ONLY) =====
-pdf_links = bot_instance.extract_pdf_links(batch_id, token)
-
-if pdf_links:
-    await update.message.reply_text(
-        "📄 **PDF LINKS:**",
-        disable_web_page_preview=True
-    )
-
-    for p in pdf_links:
-        await update.message.reply_text(
-            p,
-            disable_web_page_preview=True
-        )
-else:
-    await update.message.reply_text(
-        "📄 PDF: Not available for this batch",
-        disable_web_page_preview=True
-    )
-# =================================
 # Create bot instance
 bot = SelectionWayBot()
 
@@ -590,8 +540,6 @@ def main():
 if __name__ == '__main__':
 
     main()
-
-
 
 
 
